@@ -98,7 +98,7 @@ const LandingPage: React.FC<ILandingPage> = () => {
             How it works:
             </h1>
             <p className="mb-8 leading-relaxed">
-              On a higher level, the project encrypts the event data from the frontend client to send to the backend to store in the database, and then it re-encrypts it in a way that the client can unencrypt.
+              On a higher level, the event organizer creates an event that is encrypted from the frontend client to send to the backend to store in the database. The backend then re-encrypts it in a way that the reciepient's browser can unencrypt.
             </p>
             <h4 className="mb-4 text-2xl font-medium leading-tight text-gray-900 title-font sm:text-2xl">
               The Specifics:
@@ -118,9 +118,9 @@ const LandingPage: React.FC<ILandingPage> = () => {
 
               <p className="mb-8 leading-relaxed">
                 Symmetrical encryption system that uses only a private key and a nonce to encrypt a message. A nonce is a one-time use random string that is unique to each message.</p>
-                User A encrypts the message with their private key. 
-                They then decrypt the message with the nonce and the private key
-
+                <ol> <li>• User A encrypts the message with their private key and a nonce. </li>
+                <li>• They then decrypt the message with the nonce and the private key</li></ol><br/>
+              
 
 
               <h5 className="mb-4 text-xl font-medium leading-tight text-gray-900 title-font sm:text-xl">
@@ -147,14 +147,13 @@ const LandingPage: React.FC<ILandingPage> = () => {
               Using this method I have to trust that the following are uncompromised:
               </p>
               <ol>
-                <li>
-              The Server</li>
-              <li>The User and their login information</li>
-              <li>The Server</li>
-              <li>The Username list</li></ol>
+              <li>• The server</li>
+              <li>• The user and their login information</li> 
+              <li>• The username list</li>
+              </ol>
+              <br/>
               <p className="mb-8 leading-relaxed">
-
-              If the user login is compromised the bad actor will be able to access events they are invited to as well as create a bait event. The event would only be able to be shared with usernames known to the bad actor, which does limit its impact somewhat though.
+              If the user login is compromised the bad actor will be able to access events the user is invited to as well as create a bait event. The event would only be able to be shared with usernames known to the bad actor, which does limit its impact somewhat.
               </p>
           </div>
           <div className="object-cover object-center w-5/6 rounded shadow lg:max-w-lg lg:w-full md:w-1/2">
