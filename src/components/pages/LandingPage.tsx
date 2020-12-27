@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 interface ILandingPage {
-  loginStatus: string
+  
 }
 
 const LandingPage: React.FC<ILandingPage> = () => {
@@ -107,7 +107,7 @@ const LandingPage: React.FC<ILandingPage> = () => {
               <img
                   className="object-cover object-center w-full h-full rounded shadow"
                   alt="libsodium"
-                  src={require("../assets/images/libsodium.png")}
+                  src=""
                 />
              </div>
             <p className="mb-8 leading-relaxed">
@@ -129,7 +129,7 @@ const LandingPage: React.FC<ILandingPage> = () => {
                 <img
                   className="object-cover object-center w-full h-full rounded shadow"
                   alt="tweetncal"
-                  src={require("../assets/images/tweetncal.png")}
+                  src=""
                 />
               </div>
 
