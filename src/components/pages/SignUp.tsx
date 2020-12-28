@@ -1,4 +1,6 @@
 import React, { ChangeEvent, FormEvent, Fragment, useState } from 'react'
+import {Link} from "react-router-dom"
+
 interface ISignUp {
     setAuth: (boolean: boolean) => void
 
@@ -29,6 +31,7 @@ const SignUp: React.FC<ISignUp> = ({setAuth}) => {
             console.error(err.message)
         }
     }
+    
     return (
         <Fragment>
             <div>
@@ -40,6 +43,8 @@ const SignUp: React.FC<ISignUp> = ({setAuth}) => {
                 <button type="submit">Submit</button>
             </form></div>
             <div />
+            <Link to="/register">Sign In</Link>
+
         </Fragment>
     )
 }
