@@ -16,9 +16,9 @@ const SignUp: React.FC<ISignUp> = ({setAuth}) => {
     }
     const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault()
-        const body = {username: inputs.username, password: inputs.password, passsword_confirmation: inputs.password_confirmation}
+        const body = {username: inputs.username, password: inputs.password}
         try {
-            const response = await fetch("localhost:1337/auth/register",{
+            const response = await fetch("http://localhost:1337/auth/register",{
                 method: "POST",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify(body)
