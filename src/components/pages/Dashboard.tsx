@@ -3,7 +3,7 @@ interface IDashboard {
   setAuth: (boolean: boolean) => void;
 }
 const Dashboard: React.FC<IDashboard> = ({ setAuth }) => {
-  const [user, setUser] = useState({ username: '' });
+  const [user, setUser] = useState({ user_name: '' });
 
   const getName = async () => {
     try {
@@ -13,8 +13,8 @@ const Dashboard: React.FC<IDashboard> = ({ setAuth }) => {
       });
 
       const parseResponse = await response.json();
-
-      setUser(parseResponse.username);
+      debugger;
+      setUser(parseResponse);
       localStorage.setItem('secretKey', parseResponse.secretKey);
     } catch (err) {
       console.error(err.message);
@@ -32,7 +32,7 @@ const Dashboard: React.FC<IDashboard> = ({ setAuth }) => {
   }, []);
   return (
     <Fragment>
-      <h1>Hello, {user.username}</h1>
+      <h1>Hello, {user.user_name}</h1>
       <button onClick={(e) => logout(e)}>Sign Out</button>
     </Fragment>
   );
