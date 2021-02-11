@@ -14,8 +14,8 @@ const SignUp: React.FC<ISignUp> = ({setAuth}) => {
     const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
         setInputs({...inputs, [e.target.name]: e.target.value})
     }
-    const onSubmitForm = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    const onSubmitForm = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         const body = {username: inputs.username, password: inputs.password}
         try {
             const response = await fetch("http://localhost:1337/auth/register",{
