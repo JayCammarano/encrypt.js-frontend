@@ -13,3 +13,4 @@ it('removes duplicate invitees', async () => {
     const uniqueInvitees = await eventObject.stripDupeInvitees()
     expect(uniqueInvitees).toStrictEqual(["user1", "user2", "user3"])
 })
+

@@ -18,7 +18,7 @@ class Event implements IEvent {
     }
     
     newEventPrep = () => {
-        const {title, description, date, location } = this.body
+        const { title, description, date, location } = this.body
 
         try {
             const pk = localStorage.getItem("secret_key")
