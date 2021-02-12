@@ -31,7 +31,8 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
     const displayInvitees = inputs.invitees.map((invitee: string) => {
         position = position + 1
         return(
-        <p key={position}>{invitee} <button className="pl-2 pr-2 border-2 border-black rounded"  onClick={() => removeInvitee(position)}>Remove</button></p>)
+        <p key={position}>{invitee} <button className="pl-2 pr-2 border-2 border-black rounded"  onClick={() => removeInvitee(position)}>Remove</button></p>
+        )
     })
 
     const onChangeInvitee = (e: ChangeEvent<HTMLInputElement>) => {
@@ -52,7 +53,7 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
         e.preventDefault()
         try {
             const validEvent = {encryptedEvent: eventPrep()}
-            if(typeof validEvent === 'object'){
+            if(typeof validEvent.encryptedEvent === 'string'){
                 const token = localStorage.getItem("token")
                 if(typeof token === 'string'){
                     const submit = new onSubmit(validEvent, 'http://localhost:1337/events/new', token)
@@ -70,7 +71,7 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
     return (
         <Fragment>
             <div className="border-2 border-black">
-                <h5>Invitees</h5>
+                <h5>Invited Users:</h5>
                 {displayInvitees}
             </div>
             <form onSubmit={onSubmitHandler}>
