@@ -1,9 +1,8 @@
 import React, { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
-interface ISignIn {
-  setAuth: (boolean: boolean) => void;
-}
-const SignIn: React.FC<ISignIn> = ({ setAuth }) => {
+import IPages from "./PagesInterface"
+
+const SignIn: React.FC<IPages> = ({ setAuth }) => {
   const [inputs, setInputs] = useState({
     username: '',
     password: ''
