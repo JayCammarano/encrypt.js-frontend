@@ -1,4 +1,4 @@
-import React, { Fragment, MouseEvent, ChangeEvent, useState } from 'react'
+import React, { Fragment, MouseEvent, ChangeEvent, useState, FormEvent } from 'react'
 import IEventViews from "../EventViewsInterface"
 import Event from "../../../helpers/event"
 import onSubmit from "../../../helpers/onSubmit"
@@ -48,13 +48,14 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
         return false
         }
     }
-    const onSubmitHandler = async () => {
+    const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
         try {
-            const validEvent = {encrypted_event: eventPrep()}
+            const validEvent = {encryptedEvent: eventPrep()}
             if(typeof validEvent === 'object'){
                 const token = localStorage.getItem("token")
                 if(typeof token === 'string'){
-                    const submit = new onSubmit(validEvent, 'localhost:1337/auth/signin', token)
+                    const submit = new onSubmit(validEvent, 'http://localhost:1337/events/new', token)
                     const results = await submit.onSubmit()
                     if(results === true){
                         setWhichTab("myEvents")

@@ -14,10 +14,11 @@ class onSubmit implements ISubmit {
 
     onSubmit = async () => {
         try {
+            console.log(this.token)
             const response = await fetch(this.postURL,{
                 method: "POST",
                 headers: {"Content-Type": "application/json",
-                token: this.token},
+                        token: this.token},
                 body: JSON.stringify(this.body)
             })
 
