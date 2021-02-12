@@ -5,7 +5,13 @@ import IPages from "./PagesInterface"
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
-  const [user, setUser] = useState({ user_name: '' });
+  const [user, setUser] = useState({user: {
+                                      user_name: "",
+                                      secret_key: ""},
+                                    events: {
+                                        myEvents: [""],
+                                        invitedEvents: [""]}
+                                  });
   const [whichTab, setWhichTab] = useState("myEvents")
   const getName = async () => {
     try {
@@ -31,16 +37,15 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
   useEffect(() => {
     getName();
   }, []);
-
   return (
     <Fragment>
-      <h1>Hello, {user.user_name}</h1>
-      <button onClick={(e) => logout(e)}>Sign Out</button>
+      <h1>Hello, {user.user.user_name}</h1>
+      <button className="p-2 border-2 border-black" onClick={(e) => logout(e)}>Sign Out</button>
 
       <button className="p-3 text-white bg-black rounded button" onClick={() => setWhichTab("newEvent")}>Create an Event</button>
       <div className="flex flex-col">
         <SideNav selectedTab={whichTab} setWhichTab={setWhichTab} />
-        <ViewContainer setWhichTab={setWhichTab}  selectedTab={whichTab} />
+        <ViewContainer setWhichTab={setWhichTab} events={user.events} selectedTab={whichTab} />
       </div>
     </Fragment>
   );
