@@ -4,17 +4,20 @@ import fetch from "node-fetch"
 class onSubmit implements ISubmit {
     body: object;
     postURL: string
+    token: string
 
-    constructor( body: object, postURL: string){
+    constructor( body: object, postURL: string, token: string = "undefined"){
         this.body = body;
         this.postURL = postURL
+        this.token = token
     }
 
     onSubmit = async () => {
         try {
             const response = await fetch(this.postURL,{
                 method: "POST",
-                headers: {"Content-Type": "application/json"},
+                headers: {"Content-Type": "application/json",
+                token: this.token},
                 body: JSON.stringify(this.body)
             })
 

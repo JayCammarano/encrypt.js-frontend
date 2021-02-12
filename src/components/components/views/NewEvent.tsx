@@ -40,10 +40,13 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
         try {
             const validEvent = {encrypted_event: eventPrep()}
             if(typeof validEvent === 'object'){
-                const submit = new onSubmit(validEvent, 'localhost:1337/auth/signin')
-                const results = await submit.onSubmit()
-                if(results === true){
-                    setWhichTab("myEvents")
+                const token = localStorage.getItem("token")
+                if(typeof token === 'string'){
+                    const submit = new onSubmit(validEvent, 'localhost:1337/auth/signin', token)
+                    const results = await submit.onSubmit()
+                    if(results === true){
+                        setWhichTab("myEvents")
+                    }
                 }
             }
         } catch (error) {
