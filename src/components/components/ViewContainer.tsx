@@ -1,14 +1,11 @@
 import React from 'react'
+import IEventViews from "./EventViewsInterface"
 import NewEvent from "./views/NewEvent"
 
-interface IViewContainer {
-    selectedTab: string,
-  }
-  
-const ViewContainer: React.FC<IViewContainer> = () => {
+const ViewContainer: React.FC<IEventViews> = ({setWhichTab}) => {
     return (
-        <div className="flex w-8/12 border-black">
-            <NewEvent />  
+        <div className="flex flex-row border-black">
+            <NewEvent setWhichTab={setWhichTab}/>  
         </div>
     )
 }

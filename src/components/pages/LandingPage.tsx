@@ -1,9 +1,6 @@
 import React, {Fragment} from 'react'
-interface ILandingPage {
-  
-}
 
-const LandingPage: React.FC<ILandingPage> = () => {
+const LandingPage: React.FC = () => {
 
     return (
         <Fragment>
@@ -69,8 +66,8 @@ const LandingPage: React.FC<ILandingPage> = () => {
           </div>
       </section>
       <section>
-        <div className="flex text-right flex-col mr-12 b-12 md:mb-16 lg:flex-grow md:items-end md:text-end">
-        <div className="w-1/2 float-left lg:max-w-lg lg:w-full md:w-1/2">
+        <div className="flex flex-col mr-12 text-right b-12 md:mb-16 lg:flex-grow md:items-end md:text-end">
+        <div className="float-left w-1/2 lg:max-w-lg lg:w-full md:w-1/2">
           <h1 className="mb-4 text-3xl font-medium leading-tight text-gray-900 title-font sm:text-4xl">
             Keep Track of Upcoming Events
           </h1>
@@ -80,7 +77,7 @@ const LandingPage: React.FC<ILandingPage> = () => {
             this one feature.
           </p>
           </div>
-          <div className="w-1/2 float-right lg:max-w-lg lg:w-full md:w-1/2">
+          <div className="float-right w-1/2 lg:max-w-lg lg:w-full md:w-1/2">
             <img
               className="object-cover object-center w-full h-full rounded shadow"
               alt="spacefiller"

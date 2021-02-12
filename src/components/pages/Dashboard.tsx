@@ -1,11 +1,10 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import ViewContainer from "../components/ViewContainer"
 import SideNav from "../components/SideNav"
+import IPages from "./PagesInterface"
 
-interface IDashboard {
-  setAuth: (boolean: boolean) => void;
-}
-const Dashboard: React.FC<IDashboard> = ({ setAuth }) => {
+
+const Dashboard: React.FC<IPages> = ({ setAuth }) => {
   const [user, setUser] = useState({ user_name: '' });
   const [whichTab, setWhichTab] = useState("myEvents")
   const getName = async () => {
@@ -41,7 +40,7 @@ const Dashboard: React.FC<IDashboard> = ({ setAuth }) => {
       <button className="p-3 text-white bg-black rounded button" onClick={() => setWhichTab("newEvent")}>Create an Event</button>
       <div className="flex flex-col">
         <SideNav selectedTab={whichTab} setWhichTab={setWhichTab} />
-        <ViewContainer selectedTab={whichTab} />
+        <ViewContainer setWhichTab={setWhichTab}  selectedTab={whichTab} />
       </div>
     </Fragment>
   );
