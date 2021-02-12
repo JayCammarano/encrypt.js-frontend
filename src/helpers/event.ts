@@ -1,12 +1,15 @@
 import IEvent from "./eventInterface"
-import {encrypt} from "./secretbox"
+import SecretBox from "./secretbox"
 
 class Event implements IEvent {
     body: { title: string; description: string; date: string; location: string; invitees: string[] }
+    privateKey: string
 
-    constructor(body: { title: string; description: string; date: string; location: string; invitees: string[] }) {
+    constructor(body: { title: string; description: string; date: string; location: string; invitees: string[] }, privateKey: string) {
         this.body = body
+        this.privateKey = privateKey
     }
+
     stripDupeInvitees = () => {
         let uniqueInvitees: string[] = []
         this.body.invitees.forEach((invitee: string) => {
@@ -18,11 +21,9 @@ class Event implements IEvent {
     }
     
     newEventPrep = () => {
+        const secretBox = new SecretBox(this.privateKey)
         const { title, description, date, location } = this.body
-
         try {
-            const pk = localStorage.getItem("secret_key")
-            if(typeof pk === 'string' ){
             const validInvitees = this.stripDupeInvitees()
             const validEvent = {
                 "title": title,
@@ -30,18 +31,12 @@ class Event implements IEvent {
                 "date":  date,
                 "location": location,
                 "invitees":  validInvitees
-                
             }
-            return encrypt(validEvent, pk)
-            }else{
-                return false
-            }
+            return secretBox.encrypt(validEvent)
         } catch (error) {
             return false
         }
-       
     }
-
 }
 
 export default Event
