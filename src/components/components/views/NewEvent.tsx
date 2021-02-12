@@ -1,4 +1,4 @@
-import React, { KeyboardEvent, ChangeEvent, useState } from 'react'
+import React, { Fragment, MouseEvent, ChangeEvent, useState } from 'react'
 import IEventViews from "../EventViewsInterface"
 import Event from "../../../helpers/event"
 import onSubmit from "../../../helpers/onSubmit"
@@ -17,16 +17,28 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
         setInputs({ ...inputs, [e.target.name]: e.target.value });
       };
 
-    const onChangeInvitee = (e: ChangeEvent<HTMLInputElement>) => {
-        setInvitee(e.target.value);
-      };
-      
-    const addInvitees = (e: KeyboardEvent<HTMLInputElement>) => {
+    
+    const addInvitees = (e: MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
-        if(e.key === "enter"){
-            inputs.invitees.push(invitee);
-        }
+        inputs.invitees.push(invitee);
+        setInvitee("")
     }
+    const removeInvitee = ( position: number) => {
+        inputs.invitees.slice(position)
+    }
+    
+    let position: number = -1
+    const displayInvitees = inputs.invitees.map((invitee: string) => {
+        position = position + 1
+        return(
+        <p key={position}>{invitee} <button className="pl-2 pr-2 border-2 border-black rounded"  onClick={() => removeInvitee(position)}>Remove</button></p>)
+    })
+
+    const onChangeInvitee = (e: ChangeEvent<HTMLInputElement>) => {
+        e.preventDefault()
+        setInvitee(e.target.value);
+    };
+
     const eventPrep = () => {
         const privateKey = localStorage.getItem("secret_key")
         if(typeof privateKey === 'string'){
@@ -55,7 +67,11 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
     }
 
     return (
-        <div>
+        <Fragment>
+            <div className="border-2 border-black">
+                <h5>Invitees</h5>
+                {displayInvitees}
+            </div>
             <form onSubmit={onSubmitHandler}>
                 <div>
                     <label htmlFor="Title">
@@ -78,15 +94,17 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
                 </label>
                 </div>
                 <div>
+
                 <label htmlFor="invitee">
-                    <input id="invitee" className="m-3 border-2 border-black rounded" name="invitee" onChange={onChangeInvitee} onKeyPress={addInvitees} placeholder="invitee" type="invitee" value={invitee} />
+                    <input id="invitee" className="m-3 border-2 border-black rounded" name="invitee" onChange={onChangeInvitee} placeholder="Invite Someone" type="invitee" value={invitee} />
+                    <button type="button" className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back" name="addInvitee" onClick={addInvitees}>Add</button>
                 </label>
                 </div>
                 <button className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back" type="submit">
                 Submit
                 </button>
             </form>
-        </div>
+        </Fragment>
     )
 }
 
