@@ -1,10 +1,7 @@
 import React from 'react'
+import IEventViews from "./EventViewsInterface"
 
-interface ISideNav {
-    selectedTab: string,
-    setWhichTab: React.Dispatch<React.SetStateAction<string>>
-  }
-const SideNav: React.FC<ISideNav> = ({setWhichTab}) => {
+const SideNav: React.FC<IEventViews> = ({setWhichTab}) => {
     const setTab = (tab: string) => {
         setWhichTab(tab)
     }
