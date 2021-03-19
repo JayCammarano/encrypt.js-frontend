@@ -1,24 +1,27 @@
 import React from 'react'
 import IEventViews from "./EventViewsInterface"
-import NewEvent from "./views/NewEvent"
-import MyEvents from "./views/MyEvents"
 import Events from "./views/Events"
 import Inbox from "./views/Inbox"
+import MyEvents from "./views/MyEvents"
+import NewEventView from "./views/NewEventView"
 
-const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab}) => {
+const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events}) => {
     let visibleView;
     if(selectedTab === "newEvent"){
-        visibleView = <NewEvent setWhichTab={setWhichTab}/>  
+        visibleView = <NewEventView setWhichTab={setWhichTab}/>  
     }else if(selectedTab === "myEvents"){
-        visibleView = <MyEvents/>  
+        if(typeof events === 'object'){
+            visibleView = <MyEvents events={events.myEvents} />  
+        }else{
+        }
     }else if(selectedTab === "events"){
         visibleView = <Events/>  
     }else if(selectedTab === "inbox"){
         visibleView = <Inbox/>  
     }
-
+    
     return (
-        <div className="flex flex-row border-black">
+        <div className="flex m-4 border-black ">
             {visibleView}
         </div>
     )
