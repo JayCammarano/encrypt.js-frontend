@@ -1,7 +1,7 @@
-import IEvent from "./eventInterface"
+import INewEvent from "./newEventInterface"
 import SecretBox from "./secretbox"
 
-class Event implements IEvent {
+class NewEvent implements INewEvent {
     body: { title: string; description: string; date: string; location: string; invitees: string[] }
     privateKey: string
 
@@ -39,4 +39,4 @@ class Event implements IEvent {
     }
 }
 
-export default Event
+export default NewEvent

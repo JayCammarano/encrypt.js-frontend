@@ -1,4 +1,5 @@
-import React, {Fragment} from 'react'
+import React, { Fragment } from 'react'
+import { Link } from 'react-router-dom'
 
 const LandingPage: React.FC = () => {
 
@@ -6,18 +7,19 @@ const LandingPage: React.FC = () => {
         <Fragment>
         <section className="p-4 m-4 mb-6 text-gray-700 body-font">
         <div className="container flex-row">
-            <button
+            <Link to="/signup"><button
               className="flex flex-row float-right px-2 py-2 ml-4 text-xs bg-white border-2 border-black rounded text-md focus:outline-none hover:bg-gray-300"
               type="button"
             >
               Sign Up
-            </button>
+            </button></Link>
+            <Link to="/signin">
             <button
               className="flex flex-row float-right px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back"
               type="button"
             >
               Sign In
-            </button>
+            </button></Link>
         </div>
         <div className="container flex flex-col items-center px-4 py-6 mx-auto border-2 border-black rounded sm:py-12 md:py-24 md:flex-row">
           <div className="flex flex-col items-center mb-12 ml-4 text-center lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0">

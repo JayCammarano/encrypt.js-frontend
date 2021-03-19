@@ -1,9 +1,9 @@
 import React, { Fragment, MouseEvent, ChangeEvent, useState, FormEvent } from 'react'
 import IEventViews from "../EventViewsInterface"
-import Event from "../../../helpers/event"
+import NewEvent from "../../../helpers/newEvent"
 import onSubmit from "../../../helpers/onSubmit"
 
-const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
+const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
     const [inputs, setInputs] = useState({
         "title": "",
         "description": "",
@@ -42,7 +42,7 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
     const eventPrep = () => {
         const privateKey = localStorage.getItem("secret_key")
         if(typeof privateKey === 'string'){
-        const event = new Event(inputs, privateKey)
+        const event = new NewEvent(inputs, privateKey)
         return event.newEventPrep()
         }else{
         return false
@@ -109,4 +109,4 @@ const NewEvent: React.FC<IEventViews> = ({setWhichTab}) => {
     )
 }
 
-export default NewEvent
+export default NewEventView

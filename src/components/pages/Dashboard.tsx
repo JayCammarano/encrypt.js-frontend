@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import ViewContainer from "../components/ViewContainer"
 import SideNav from "../components/SideNav"
 import IPages from "./PagesInterface"
+import Events from "../../helpers/events"
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
@@ -22,15 +23,24 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
 
       const parseResponse = await response.json();
       setUser(parseResponse);
-      localStorage.setItem('secretKey', parseResponse.secretKey);
+      localStorage.setItem('privateKey', parseResponse.secret_key);
+      eventsToPlainText(localStorage.getItem('privateKey'))
     } catch (err) {
       console.error(err.message);
     }
   };
+  const eventsToPlainText = (key: string | null) => {
+    if(typeof key === 'string'){
+      const eventHandler = new Events(key, user.events)
+      const plainTextEvents = eventHandler.unpackEvents()
+      setUser({...user, events: plainTextEvents})
+    }
+  }
+
   const logout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     localStorage.removeItem('token');
-    localStorage.removeItem('secretKey');
+    localStorage.removeItem('privateKey');
     setAuth(false);
   };
 
