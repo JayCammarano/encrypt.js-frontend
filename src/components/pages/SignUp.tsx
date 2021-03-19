@@ -52,7 +52,7 @@ const SignUp: React.FC<IPages> = ({setAuth}) => {
             </div>
             <button className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back" type="submit">Submit</button>
             <Link to="/signin">
-                <button className="px-2 py-2 m-4 text-xs text-black bg-white border-0 rounded focus:outline-white hover:bg-black hover:border-white hover:text-white hover:outline-back" type="button">Sign Up</button>
+                <button className="px-2 py-2 m-4 text-xs text-black bg-white border-0 rounded focus:outline-white hover:bg-black hover:border-white hover:text-white hover:outline-back" type="button">Sign In</button>
             </Link> 
             </form>
             </div>

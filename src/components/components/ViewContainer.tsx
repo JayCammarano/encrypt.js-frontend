@@ -1,9 +1,9 @@
 import React from 'react'
 import IEventViews from "./EventViewsInterface"
-import NewEventView from "./views/NewEventView"
-import MyEvents from "./views/MyEvents"
 import Events from "./views/Events"
 import Inbox from "./views/Inbox"
+import MyEvents from "./views/MyEvents"
+import NewEventView from "./views/NewEventView"
 
 const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events}) => {
     let visibleView;
@@ -21,7 +21,7 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events}
     }
     
     return (
-        <div className="flex flex-row border-black">
+        <div className="flex m-4 border-black ">
             {visibleView}
         </div>
     )

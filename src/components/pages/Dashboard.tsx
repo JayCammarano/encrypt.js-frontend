@@ -1,8 +1,8 @@
-import React, { Fragment, useState, useEffect } from 'react';
-import ViewContainer from "../components/ViewContainer"
-import SideNav from "../components/SideNav"
-import IPages from "./PagesInterface"
-import Events from "../../helpers/events"
+import React, { Fragment, useEffect, useState } from 'react';
+import Events from "../../helpers/events";
+import SideNav from "../components/SideNav";
+import ViewContainer from "../components/ViewContainer";
+import IPages from "./PagesInterface";
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
@@ -49,11 +49,17 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
   }, []);
   return (
     <Fragment>
-      <h1>Hello, {user.user.user_name}</h1>
-      <button className="p-2 border-2 border-black" onClick={(e) => logout(e)}>Sign Out</button>
-
-      <button className="p-3 text-white bg-black rounded button" onClick={() => setWhichTab("newEvent")}>Create an Event</button>
-      <div className="flex flex-col">
+      <div className="w-full h-2/5">
+        <div className="text-right">
+          <button className="px-2 py-2 m-4 text-xs text-black bg-white border-2 rounded focus:outline-white hover:bg-black hover:border-white hover:text-white hover:outline-back" onClick={(e) => logout(e)}>Sign Out</button>
+        </div>
+        <h1 className="p-4 text-3xl font-medium leading-tight text-center text-gray-900 title-font sm:text-4xl">Hello, {user.user.user_name}</h1>
+        
+        <div className="text-right">
+        <button className="p-3 m-4 text-right text-white bg-black rounded button" onClick={() => setWhichTab("newEvent")}>Create an Event</button>
+        </div>
+      </div>
+      <div className="flex flex-row">
         <SideNav selectedTab={whichTab} setWhichTab={setWhichTab} />
         <ViewContainer setWhichTab={setWhichTab} events={user.events} selectedTab={whichTab} />
       </div>
