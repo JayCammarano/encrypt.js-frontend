@@ -1,16 +1,19 @@
 import React, { ChangeEvent, FormEvent, MouseEvent, useState } from 'react'
+import { EventInfo } from '../../../helpers/eventsInterface'
 import NewEvent from "../../../helpers/newEvent"
 import onSubmit from "../../../helpers/onSubmit"
 import IEventViews from "../EventViewsInterface"
 
 const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
-    const [inputs, setInputs] = useState({
+    let newEvent: EventInfo = {
         "title": "",
         "description": "",
         "date": "",
         "location":"",
-        "invitees": [""]
-    })
+        "invitees": []
+    };
+    
+    const [inputs, setInputs] = useState(newEvent)
     
     const [invitee, setInvitee] = useState("")
     const onChangeInputs = (e: ChangeEvent<HTMLInputElement>) => {
