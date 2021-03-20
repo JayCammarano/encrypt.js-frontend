@@ -29,8 +29,8 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
       setUser(parseResponse);
       if(await parseResponse.user.secret_key){
         localStorage.setItem('privateKey', parseResponse.user.secret_key);
+        eventsToPlainText(localStorage.getItem("privateKey"))
       }
-      eventsToPlainText(parseResponse.secret_key)
     } catch (err) {
       toast.error(err.message);
     }
@@ -39,7 +39,10 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
     if(typeof key === 'string'){
       const eventHandler = new Events(key, user.events)
       const plainTextEvents = eventHandler.unpackEvents()
-      setUser({...user, events: plainTextEvents})
+      console.log(plainTextEvents)
+      // if(plainTextEvents){
+      //   setUser({...user, events: plainTextEvents})
+      // }
     }
   }
 
@@ -47,13 +50,13 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
     e.preventDefault();
     localStorage.removeItem('token');
     localStorage.removeItem('privateKey');
-    localStorage.removeItem('secretKey');
     setAuth(false);
     toast.success("Logout Successful!")
   };
 
   useEffect(() => {
     getName();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Fragment>
