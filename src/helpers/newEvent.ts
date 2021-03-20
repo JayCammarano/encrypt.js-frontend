@@ -34,6 +34,7 @@ class NewEvent implements INewEvent {
             }
             return secretBox.encrypt(validEvent)
         } catch (error) {
+            console.log(error)
             return false
         }
     }

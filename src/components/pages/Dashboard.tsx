@@ -3,17 +3,21 @@ import { toast } from 'react-toastify';
 import Events from "../../helpers/events";
 import SideNav from "../components/SideNav";
 import ViewContainer from "../components/ViewContainer";
-import IPages from "./PagesInterface";
+import IPages, { MyEvents } from "./PagesInterface";
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
-  const [user, setUser] = useState({user: {
-                                      user_name: "",
-                                      secret_key: ""},
-                                    events: {
-                                        myEvents: [""],
-                                        invitedEvents: [""]}
-                                  });
+  const myEvent: MyEvents = {
+                              user: {
+                                user_name: "",
+                                secret_key: ""
+                              },
+                              events: {
+                                  myEvents: [],
+                                  invitedEvents: []
+                              }
+                            }
+  const [user, setUser] = useState(myEvent);
   const [whichTab, setWhichTab] = useState("myEvents")
   const getName = async () => {
     try {
@@ -21,13 +25,14 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
         method: 'GET',
         headers: { token: localStorage.token }
       });
-
       const parseResponse = await response.json();
       setUser(parseResponse);
-      localStorage.setItem('privateKey', parseResponse.secret_key);
-      eventsToPlainText(localStorage.getItem('privateKey'))
+      if(await parseResponse.user.secret_key){
+        localStorage.setItem('privateKey', parseResponse.user.secret_key);
+      }
+      eventsToPlainText(parseResponse.secret_key)
     } catch (err) {
-      console.error(err.message);
+      toast.error(err.message);
     }
   };
   const eventsToPlainText = (key: string | null) => {
