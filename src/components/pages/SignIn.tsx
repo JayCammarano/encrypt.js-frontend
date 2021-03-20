@@ -28,6 +28,7 @@ const SignIn: React.FC<IPages> = ({ setAuth }) => {
       console.error(err.message);
     }
   };
+  
   return (
     <Fragment>
       <div className="w-1/3 h-screen bg-gray-300 ">  
