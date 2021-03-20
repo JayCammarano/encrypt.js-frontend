@@ -1,6 +1,8 @@
-import React, { ChangeEvent, FormEvent, Fragment, useState } from 'react'
-import { Link } from "react-router-dom"
-import IPages from './PagesInterface'
+import React, { ChangeEvent, FormEvent, Fragment, useState } from 'react';
+import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import IPages from './PagesInterface';
+
 
 
 const SignUp: React.FC<IPages> = ({setAuth}) => {
@@ -23,10 +25,16 @@ const SignUp: React.FC<IPages> = ({setAuth}) => {
             })
 
             const parseResponse =  await response.json()
-            localStorage.setItem("token", parseResponse.token)
-            setAuth(true)
+            if(parseResponse.token){
+                localStorage.setItem("token", parseResponse.token)
+                setAuth(true)
+                toast.success("Sign Up Successful!")
+            }else {
+                setAuth(false)
+                toast.error(parseResponse)
+            }
         } catch (err) {
-            console.error(err.message)
+            toast.error(err.message)
         }
     }
     

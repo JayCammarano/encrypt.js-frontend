@@ -26,7 +26,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "strictNullChecks": true,
-    "isolatedModules": false
+    "isolatedModules": true
   },
   "include": [
     "src"

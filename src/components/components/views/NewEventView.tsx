@@ -1,4 +1,5 @@
 import React, { ChangeEvent, FormEvent, MouseEvent, useState } from 'react'
+import { toast } from "react-toastify"
 import { EventInfo } from '../../../helpers/eventsInterface'
 import NewEvent from "../../../helpers/newEvent"
 import onSubmit from "../../../helpers/onSubmit"
@@ -66,11 +67,12 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
                     const results = await submit.onSubmit()
                     if(results === true){
                         setWhichTab("myEvents")
+                        toast.success("New Event Created!")
                     }
                 }
             }
         } catch (error) {
-            console.log(error)
+            toast.error(error)
         }
     }
 

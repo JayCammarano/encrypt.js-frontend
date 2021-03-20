@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import Events from "../../helpers/events";
 import SideNav from "../components/SideNav";
 import ViewContainer from "../components/ViewContainer";
@@ -41,7 +42,9 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
     e.preventDefault();
     localStorage.removeItem('token');
     localStorage.removeItem('privateKey');
+    localStorage.removeItem('secretKey');
     setAuth(false);
+    toast.success("Logout Successful!")
   };
 
   useEffect(() => {
