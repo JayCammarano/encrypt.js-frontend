@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import IPages from "./PagesInterface";
 
 const SignIn: React.FC<IPages> = ({ setAuth }) => {
@@ -22,8 +23,14 @@ const SignIn: React.FC<IPages> = ({ setAuth }) => {
       });
 
       const parseResponse = await response.json();
-      localStorage.setItem('token', parseResponse.token);
-      setAuth(true);
+      if(parseResponse.token){
+        
+        localStorage.setItem('token', parseResponse.token);
+        setAuth(true);
+        toast.success("Logged in successfully!")
+      }else{
+        toast.error(parseResponse)
+      }
     } catch (err) {
       console.error(err.message);
     }

@@ -1,5 +1,5 @@
-import ISubmit from "./onSubmitInerface"
-import fetch from "node-fetch"
+import fetch from "node-fetch";
+import ISubmit from "./onSubmitInerface";
 
 class onSubmit implements ISubmit {
     body: object;
@@ -14,7 +14,6 @@ class onSubmit implements ISubmit {
 
     onSubmit = async () => {
         try {
-            console.log(this.token)
             const response = await fetch(this.postURL,{
                 method: "POST",
                 headers: {"Content-Type": "application/json",

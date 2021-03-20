@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import Dashboard from "./components/pages/Dashboard";
 import LandingPage from './components/pages/LandingPage';
 import SignIn from "./components/pages/SignIn";
 import SignUp from './components/pages/SignUp';
-// TO_DO: Login status
+
+toast.configure();
+
 const App: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const setAuth = (boolean: boolean) => {
@@ -12,10 +16,8 @@ const App: React.FC = () => {
   }
 
   async function isAuthed(){
-    console.log("Running Authed Check")
     const token = localStorage.getItem("token")
     if(!token){
-      console.log(false)
       return false
     }
     try {
@@ -27,7 +29,6 @@ const App: React.FC = () => {
       parseRes === true ? setIsAuthenticated(true) : setIsAuthenticated(false)
       return true
     } catch (error) {
-      console.log("false no response")
       return false
     }
   }
