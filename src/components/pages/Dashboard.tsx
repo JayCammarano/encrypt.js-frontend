@@ -27,7 +27,9 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
       });
       const parseResponse = await response.json();
       setUser(parseResponse);
-      localStorage.setItem('privateKey', parseResponse.secret_key);
+      if(await parseResponse.user.secret_key){
+        localStorage.setItem('privateKey', parseResponse.user.secret_key);
+      }
       eventsToPlainText(parseResponse.secret_key)
     } catch (err) {
       toast.error(err.message);

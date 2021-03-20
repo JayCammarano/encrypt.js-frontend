@@ -48,19 +48,21 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
     };
 
     const eventPrep = () => {
-        const privateKey = localStorage.getItem("secret_key")
+        const privateKey = localStorage.getItem("privateKey")
         if(typeof privateKey === 'string'){
-        const event = new NewEvent(inputs, privateKey)
-        return event.newEventPrep()
+            const event = new NewEvent(inputs, privateKey)
+            console.log("world")
+            return event.newEventPrep()
         }else{
-        return false
+            console.log("hello")
+            return false
         }
     }
     const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         try {
             const validEvent = {encryptedEvent: eventPrep()}
-            if(typeof validEvent === 'object'){
+            if(validEvent.encryptedEvent){
                 const token = localStorage.getItem("token")
                 if(typeof token === 'string'){
                     const submit = new onSubmit(validEvent, 'http://localhost:1337/events/new', token)
