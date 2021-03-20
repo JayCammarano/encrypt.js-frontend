@@ -67,6 +67,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
                     const results = await submit.onSubmit()
                     if(results === true){
                         setWhichTab("myEvents")
+                        toast.success("New Event Created!")
                     }
                 }
             }
