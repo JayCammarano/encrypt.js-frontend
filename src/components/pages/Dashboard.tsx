@@ -21,13 +21,12 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
         method: 'GET',
         headers: { token: localStorage.token }
       });
-
       const parseResponse = await response.json();
       setUser(parseResponse);
       localStorage.setItem('privateKey', parseResponse.secret_key);
-      eventsToPlainText(localStorage.getItem('privateKey'))
+      eventsToPlainText(parseResponse.secret_key)
     } catch (err) {
-      console.error(err.message);
+      toast.error(err.message);
     }
   };
   const eventsToPlainText = (key: string | null) => {
