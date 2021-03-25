@@ -1,8 +1,8 @@
-import { secretbox, secretbox_open } from 'tweetnacl-ts';
-import { randomBytes } from 'crypto';
+import { decode as decodeBase64, encode as encodeBase64 } from '@stablelib/base64';
 import { decode as decodeUTF8, encode as encodeUTF8 } from '@stablelib/utf8';
-import { encode as encodeBase64, decode as decodeBase64 } from '@stablelib/base64';
-import ISecretBox from "./secretBoxInterface"
+import { randomBytes } from 'crypto';
+import { secretbox, secretbox_open } from 'tweetnacl-ts';
+import ISecretBox from "./secretBoxInterface";
 
 class SecretBox implements ISecretBox {
   nonceLength: number

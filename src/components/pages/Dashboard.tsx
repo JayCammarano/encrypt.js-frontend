@@ -18,8 +18,13 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
                               }
                             }
   const [user, setUser] = useState(myEvent);
+
+  const [unpackedEvents, setUnpackedEvents] = useState({
+    myEvents: [""],
+    invitedEvents: [""]
+});
   const [whichTab, setWhichTab] = useState("myEvents")
-  const getName = async () => {
+  const getUser = async () => {
     try {
       const response = await fetch('http://localhost:1337/dashboard', {
         method: 'GET',
@@ -29,21 +34,22 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
       setUser(parseResponse);
       if(await parseResponse.user.secret_key){
         localStorage.setItem('privateKey', parseResponse.user.secret_key);
-        eventsToPlainText(localStorage.getItem("privateKey"))
       }
     } catch (err) {
       toast.error(err.message);
     }
   };
-  const eventsToPlainText = (key: string | null) => {
+  const eventsToPlainText = async (key: string | null, events: { myEvents: string[]; invitedEvents: string[]; }) => {
     if(typeof key === 'string'){
-      const eventHandler = new Events(key, user.events)
-      const plainTextEvents = eventHandler.unpackEvents()
-      console.log(plainTextEvents)
-      // if(plainTextEvents){
-      //   setUser({...user, events: plainTextEvents})
-      // }
+      // Error: a new Events() is sometimes made with no events in user events (async issue)
+      // Should be solved: Error: When events do hit the decoder it says "Base64Coder: incorrect characters for decoding" 
+      const eventHandler = new Events(key, events)
+      const plainTextEvents = await eventHandler.unpackEvents()
+      if(plainTextEvents){
+        setUnpackedEvents(plainTextEvents)
+      }
     }
+    return events
   }
 
   const logout = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -55,9 +61,16 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
   };
 
   useEffect(() => {
-    getName();
+    getUser();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  
+  useEffect(() =>{
+    if(user.events !== { myEvents: [], invitedEvents:[] }){
+      eventsToPlainText(localStorage.getItem("privateKey"), user.events)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user])
   return (
     <Fragment>
       <div className="w-full h-2/5">
@@ -72,7 +85,7 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
       </div>
       <div className="flex flex-row">
         <SideNav selectedTab={whichTab} setWhichTab={setWhichTab} />
-        <ViewContainer setWhichTab={setWhichTab} events={user.events} selectedTab={whichTab} />
+        <ViewContainer setWhichTab={setWhichTab} events={unpackedEvents} selectedTab={whichTab} />
       </div>
     </Fragment>
   );

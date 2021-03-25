@@ -1,6 +1,6 @@
-import IEvents from "./eventsInterface"
+import IAllEvents from "./eventsInterface"
 import SecretBox from "./secretbox"
-class Events implements IEvents{
+class Events implements IAllEvents{
     allEvents: {myEvents: string[];
             invitedEvents: string[];}
     privateKey: string
@@ -14,18 +14,23 @@ class Events implements IEvents{
         return secretBox.decrypt(event)
     }
 
-    unpackEvents = () => {
-        const decryptedEvents = {
-            myEvents: [""],
-            invitedEvents: [""]
-        }
-        this.allEvents.myEvents.forEach(event => {
-            decryptedEvents.myEvents.push(this.decryptEvent(event))
-        });
-        this.allEvents.invitedEvents.forEach(event => {
-            decryptedEvents.invitedEvents.push(this.decryptEvent(event))
-        });
-        return decryptedEvents
+    unpackEvents = async () => {
+        const myEvents = Promise.all(this.allEvents.myEvents.map(event => {
+            if(event){
+                const events = this.decryptEvent(event)
+                return events
+            }
+            return {title: "Null", description: "null", date: "null", location: "null", invitees: ["null"]}
+        }));
+
+        const invitedEvents = Promise.all(this.allEvents.invitedEvents.map(event => {
+            if(event){
+                const events = this.decryptEvent(event)
+                return events
+            }
+            return {title: "Null", description: "null", date: "null", location: "null", invitees: ["null"]}
+        }));
+        return {myEvents: await myEvents, invitedEvents: await invitedEvents}
     }
 }
 
