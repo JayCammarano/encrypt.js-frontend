@@ -4,7 +4,7 @@ class Events implements IAllEvents{
     allEvents: {myEvents: string[];
             invitedEvents: string[];}
     privateKey: string
-    constructor(privateKey: string, allEvents: {myEvents: string[]; invitedEvents: string[];} = {myEvents: [""], invitedEvents: [""]}) {
+    constructor(privateKey: string, allEvents: {myEvents: string[]; invitedEvents: string[];}) {
         this.privateKey = privateKey
         this.allEvents = allEvents
     }
@@ -15,18 +15,24 @@ class Events implements IAllEvents{
     }
 
     unpackEvents = async () => {
+        let myI = 0
+        let invI = 0
         const myEvents = Promise.all(this.allEvents.myEvents.map(event => {
             if(event){
-                const events = this.decryptEvent(event)
-                return events
+                const dEvent = this.decryptEvent(event)
+                dEvent.index = myI
+                myI += 1
+                return dEvent
             }
             return {title: "Null", description: "null", date: "null", location: "null", invitees: ["null"]}
         }));
 
         const invitedEvents = Promise.all(this.allEvents.invitedEvents.map(event => {
             if(event){
-                const events = this.decryptEvent(event)
-                return events
+                const dEvent = this.decryptEvent(event)
+                dEvent.index = invI
+                invI += 1
+                return dEvent
             }
             return {title: "Null", description: "null", date: "null", location: "null", invitees: ["null"]}
         }));
