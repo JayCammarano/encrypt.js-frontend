@@ -1,13 +1,15 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Events from "../../helpers/events";
+import { IEventDetails } from '../../helpers/eventsInterface';
 import SideNav from "../components/SideNav";
 import ViewContainer from "../components/ViewContainer";
-import IPages, { MyEvents } from "./PagesInterface";
+import IPages, { RawUserInfo } from "./PagesInterface";
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
-  const myEvent: MyEvents = {
+  const eventDetail: IEventDetails = {event: {title: "string", description: "string", date: "string", location: "string", invitees: [""]}}
+  const myEvent: RawUserInfo = {
                               user: {
                                 user_name: "",
                                 secret_key: ""
@@ -20,8 +22,8 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
   const [user, setUser] = useState(myEvent);
 
   const [unpackedEvents, setUnpackedEvents] = useState({
-    myEvents: [""],
-    invitedEvents: [""]
+    myEvents: [eventDetail],
+    invitedEvents: [eventDetail]
 });
   const [whichTab, setWhichTab] = useState("myEvents")
   const getUser = async () => {
