@@ -1,8 +1,13 @@
+import { EventInfo } from "../../helpers/eventsInterface";
+
 interface IEventViews {
     setWhichTab: React.Dispatch<React.SetStateAction<string>>
     selectedTab?: string,
-    events?: {myEvents: string[];
-            invitedEvents: string[];}
+    selectedEvent?: [string, number]
+    setSelectedEvent: React.Dispatch<React.SetStateAction<[string, number]>>
+
+    events?: {myEvents: EventInfo[];
+            invitedEvents: EventInfo[];}
 }
 
 export default IEventViews

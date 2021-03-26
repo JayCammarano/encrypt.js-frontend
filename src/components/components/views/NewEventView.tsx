@@ -51,10 +51,8 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
         const privateKey = localStorage.getItem("privateKey")
         if(typeof privateKey === 'string'){
             const event = new NewEvent(inputs, privateKey)
-            console.log("world")
             return event.newEventPrep()
         }else{
-            console.log("hello")
             return false
         }
     }
