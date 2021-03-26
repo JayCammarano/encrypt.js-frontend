@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import IEventViews from "./EventViewsInterface"
 import Events from "./views/Events"
 import Inbox from "./views/Inbox"
+import MyEventDetails from './views/MyEventDetails'
 import MyEvents from "./views/MyEvents"
 import NewEventView from "./views/NewEventView"
 
-const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events}) => {
-    const initEvent: [string, number] = ["", 0]
-    const [selectedEvent, setSelectedEvent] = useState(initEvent)
+const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events, selectedEvent=["", 0], setSelectedEvent}) => {
     let visibleView;
     if(selectedTab === "newEvent"){
-        visibleView = <NewEventView setWhichTab={setWhichTab}/>  
+        visibleView = <NewEventView setSelectedEvent={setSelectedEvent} setWhichTab={setWhichTab}/>  
     }else if(selectedTab === "myEvents"){
         if(typeof events === 'object'){
             visibleView = <MyEvents setSelectedEvent={setSelectedEvent} events={events.myEvents} />  
@@ -21,15 +20,17 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events}
     }else if(selectedTab === "inbox"){
         visibleView = <Inbox/>  
     }
-    let eventDetail;
+    
+    let eventDetails
     if(selectedEvent[0] === "myEvent" && events){
-        console.log(events.myEvents[selectedEvent[1]])
-        // eventDetail  = <MyEventDetails event={events.myEvents[selectedEvent[1]]} />
+        eventDetails = <MyEventDetails event={events.myEvents[selectedEvent[1]]} />
+    }else{
+        eventDetails = null
     }
     return (
         <div className="flex border-black ">
             {visibleView}
-            {eventDetail}
+            {eventDetails}
         </div>
     )
 }

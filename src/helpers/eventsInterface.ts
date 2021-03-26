@@ -5,19 +5,14 @@ interface IAllEvents {
 }
 
 export interface IEvents {
-    events: IEventDetails[]
+    events: EventInfo[]
     setSelectedEvent: React.Dispatch<React.SetStateAction<[string, number]>>
 }
 
 export interface IEventDetails {
-    event: {title: string, 
-            description: string, 
-            date: string, 
-            location: string, 
-            invitees: string[], 
-            index?: number
-        }
+    event: EventInfo
 }
+
 export type EventInfo = {
     title: string,
     description: string,

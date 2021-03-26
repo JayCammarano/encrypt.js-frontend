@@ -1,8 +1,9 @@
 import React from 'react'
 import IEventViews from "./EventViewsInterface"
 
-const SideNav: React.FC<IEventViews> = ({setWhichTab}) => {
+const SideNav: React.FC<IEventViews> = ({setWhichTab, setSelectedEvent}) => {
     const setTab = (tab: string) => {
+        setSelectedEvent(["", 0])
         setWhichTab(tab)
     }
 

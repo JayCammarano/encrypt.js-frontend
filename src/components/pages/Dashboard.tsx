@@ -1,14 +1,14 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import Events from "../../helpers/events";
-import { IEventDetails } from '../../helpers/eventsInterface';
+import { EventInfo } from '../../helpers/eventsInterface';
 import SideNav from "../components/SideNav";
 import ViewContainer from "../components/ViewContainer";
 import IPages, { RawUserInfo } from "./PagesInterface";
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
-  const eventDetail: IEventDetails = {event: {title: "string", description: "string", date: "string", location: "string", invitees: [""]}}
+  const eventDetail: EventInfo = {title: "string", description: "string", date: "string", location: "string", invitees: []}
   const myEvent: RawUserInfo = {
                               user: {
                                 user_name: "",
@@ -25,6 +25,10 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
     myEvents: [eventDetail],
     invitedEvents: [eventDetail]
 });
+
+const initEvent: [string, number] = ["", 0]
+const [selectedEvent, setSelectedEvent] = useState(initEvent)
+
   const [whichTab, setWhichTab] = useState("myEvents")
   const getUser = async () => {
     try {
@@ -43,8 +47,6 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
   };
   const eventsToPlainText = async (key: string | null, events: { myEvents: string[]; invitedEvents: string[]; }) => {
     if(typeof key === 'string'){
-      // Error: a new Events() is sometimes made with no events in user events (async issue)
-      // Should be solved: Error: When events do hit the decoder it says "Base64Coder: incorrect characters for decoding" 
       const eventHandler = new Events(key, events)
       const plainTextEvents = await eventHandler.unpackEvents()
       if(plainTextEvents){
@@ -73,6 +75,11 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user])
+
+  const onClickSelector = () => {
+    setWhichTab("newEvent")
+    setSelectedEvent(["", 0])
+}
   return (
     <Fragment>
       <div className="w-full h-2/5">
@@ -82,12 +89,12 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
         <h1 className="p-4 text-3xl font-medium leading-tight text-center text-gray-900 title-font sm:text-4xl">Hello, {user.user.user_name}</h1>
         
         <div className="text-right">
-        <button className="p-3 m-4 text-right text-white bg-black rounded button" onClick={() => setWhichTab("newEvent")}>Create an Event</button>
+        <button className="p-3 m-4 text-right text-white bg-black rounded button" onClick={() => onClickSelector()}>Create an Event</button>
         </div>
       </div>
       <div className="flex flex-row">
-        <SideNav selectedTab={whichTab} setWhichTab={setWhichTab} />
-        <ViewContainer setWhichTab={setWhichTab} events={unpackedEvents} selectedTab={whichTab} />
+        <SideNav setSelectedEvent={setSelectedEvent} selectedTab={whichTab} setWhichTab={setWhichTab} />
+        <ViewContainer setSelectedEvent={setSelectedEvent} selectedEvent={selectedEvent} setWhichTab={setWhichTab} events={unpackedEvents} selectedTab={whichTab} />
       </div>
     </Fragment>
   );
