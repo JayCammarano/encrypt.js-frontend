@@ -16,7 +16,8 @@ export interface IEventDetails {
 export type EventInfo = {
     title: string,
     description: string,
-    date: string,
+    unformatedDate?: { year: string, month: string, day: string, time: string },
+    date?: string,
     location:string,
     invitees: string[]
 
