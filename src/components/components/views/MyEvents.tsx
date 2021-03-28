@@ -6,6 +6,7 @@ const MyEvents: React.FC<IEvents>  = ({events, setSelectedEvent}) => {
     const onClickSelector = (index: number) => {
         setSelectedEvent(["myEvent", index])
     }
+    // sort events by date desc
     const eventDisplay = events.map((event: any) => {
         i += 1
         let bg_color = "bg-gray-100";
@@ -20,7 +21,7 @@ const MyEvents: React.FC<IEvents>  = ({events, setSelectedEvent}) => {
         )
     })
     return (
-        <div>
+        <div className="h-screen overflow-scroll">
             {eventDisplay}
         </div>
     )

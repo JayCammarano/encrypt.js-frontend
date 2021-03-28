@@ -1,3 +1,4 @@
+import { toast } from "react-toastify"
 import INewEvent from "./newEventInterface"
 import SecretBox from "./secretbox"
 
@@ -34,7 +35,7 @@ class NewEvent implements INewEvent {
             }
             return secretBox.encrypt(validEvent)
         } catch (error) {
-            console.log(error)
+            toast.error(error)
             return false
         }
     }
