@@ -50,12 +50,12 @@ const SignUp: React.FC<IPages> = ({setAuth}) => {
             </div>
             <div>
                 <label htmlFor="Username">
-                    <input className="m-3 border-2 border-black rounded" type="password "name="password" placeholder="password" value={inputs.password} onChange={e => onChangeInputs(e)}/>
+                    <input className="m-3 border-2 border-black rounded" type="password" name="password" placeholder="password" value={inputs.password} onChange={e => onChangeInputs(e)}/>
                 </label>
             </div>
             <div>
                 <label htmlFor="Username">
-                    <input className="m-3 border-2 border-black rounded" type="password "name="password_confirmation" placeholder="password confirmation" value={inputs.password_confirmation} onChange={e => onChangeInputs(e)}/>
+                    <input className="m-3 border-2 border-black rounded" type="password" name="password_confirmation" placeholder="password confirmation" value={inputs.password_confirmation} onChange={e => onChangeInputs(e)}/>
                 </label>
             </div>
             <button className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back" type="submit">Submit</button>
