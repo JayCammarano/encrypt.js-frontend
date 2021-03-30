@@ -31,7 +31,7 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events,
         eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]]} />
     }
     return (
-        <div className="flex border-black ">
+        <div className="flex border-black margin-0">
             {visibleView}
             {eventDetails}
         </div>

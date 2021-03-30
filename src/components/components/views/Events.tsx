@@ -34,7 +34,7 @@ const Events: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
         )
     })
     return (
-        <div>
+        <div className="h-screen overflow-scroll bg-gray-200 border-l-2 border-gray-300">
             {eventDisplay}
         </div>
     )

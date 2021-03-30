@@ -14,7 +14,7 @@ const MyEvents: React.FC<IEvents>  = ({events, setSelectedEvent}) => {
             bg_color = "bg-gray-200"
         }
         return(
-            <div onClick={() => onClickSelector(event.index)} className={`p-4 border-black ${bg_color} w-full`} key={i}>
+            <div onClick={() => onClickSelector(event.index)} className={`p-4 border-black ${bg_color} w-full `} key={i}>
                 <p>{event.title}</p>
                 <p className="text-xs text-gray-700">{event.date}</p>
             </div>
