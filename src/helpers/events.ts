@@ -24,7 +24,7 @@ class Events implements IAllEvents{
                 myI += 1
                 return dEvent
             }
-            return {title: "Null", description: "null", date: "null", location: "null", invitees: ["null"]}
+            return undefined
         }));
 
         const invitedEvents = Promise.all(this.allEvents.invitedEvents.map(event => {
@@ -34,7 +34,7 @@ class Events implements IAllEvents{
                 invI += 1
                 return dEvent
             }
-            return {title: "Null", description: "null", date: "null", location: "null", invitees: ["null"]}
+            return undefined
         }));
         return {myEvents: await myEvents, invitedEvents: await invitedEvents}
     }
