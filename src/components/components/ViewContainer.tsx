@@ -16,7 +16,10 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events,
         }else{
         }
     }else if(selectedTab === "events"){
-        visibleView = <Events/>  
+        if(typeof events === 'object'){
+            visibleView = <Events setSelectedEvent={setSelectedEvent} allEvents={events}/>  
+        }else{
+        }
     }else if(selectedTab === "inbox"){
         visibleView = <Inbox/>  
     }
@@ -24,8 +27,8 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events,
     let eventDetails
     if(selectedEvent[0] === "myEvent" && events){
         eventDetails = <MyEventDetails event={events.myEvents[selectedEvent[1]]} />
-    }else{
-        eventDetails = null
+    }else if (selectedEvent[0] === "invitedEvents" && events ){
+        eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]]} />
     }
     return (
         <div className="flex border-black ">
