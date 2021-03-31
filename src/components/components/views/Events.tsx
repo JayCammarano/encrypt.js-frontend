@@ -26,15 +26,20 @@ const Events: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
         if(i % 2 === 0){
             bg_color = "bg-gray-200"
         }
+        let truncEventTitle = event[0].title
+
+        if(event[0].title.length >= 27){
+            truncEventTitle = event[0].title.substring(0,27) + "..."
+        }
         return(
             <div onClick={() => onClickSelector(event)} className={`p-4 border-black ${bg_color} w-full`} key={i}>
-                <p>{event[0].title}</p>
+                <p>{truncEventTitle}</p>
                 <p className="text-xs text-gray-700">{event[0].date}</p>
             </div>
         )
     })
     return (
-        <div>
+        <div className="h-screen overflow-scroll bg-gray-200 border-l-2 border-gray-300">
             {eventDisplay}
         </div>
     )
