@@ -128,13 +128,9 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
 
     return (
         <Fragment>
-            <div className="flex w-full p-4 text-center bg-gray-100">
-            <h1 className="p-4 text-3xl font-medium leading-tight text-center text-gray-900 title-font sm:text-4xl">Create New Event</h1>
-            <div className="flex flex-col w-2/3 p-4 overflow-scroll text-center border-2 border-black rounded h-1/2">
-                <h5>Invited Members</h5>
-                {displayInvitees}
-            </div>
-            <div className="flex">
+            <div className="w-full p-4 text-center bg-gray-100 border-l-2 border-gray-300">
+                <h1 className="p-4 text-3xl font-medium leading-tight text-center text-gray-900 title-font sm:text-4xl">Create New Event</h1>            
+                <div className="flex w-full">
                 <form onSubmit={onSubmitHandler}>
                     <div>
                         <label htmlFor="Title">
@@ -155,13 +151,17 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
                     <div>
                     <label htmlFor="invitee">
                         <input id="invitee" className="m-3 border-2 border-black rounded" name="invitee" onChange={onChangeInvitee} placeholder="Invite Someone" type="invitee" value={invitee} />
-                        <button type="button" className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back" name="addInvitee" onClick={addInvitees}>Add</button>
+                        <button type="button" className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-2 hover:border-black hover:text-black hover:outline-back" name="addInvitee" onClick={addInvitees}>Add</button>
                     </label>
                     </div>
-                    <button className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back" type="submit">
+                    <button className="px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:border-2 hover:text-black hover:outline-back" type="submit">
                     Submit
                     </button>
                 </form>  
+                <div className="flex w-2/3 p-4 overflow-scroll text-center border-2 border-black rounded">
+                <h5>Invited Members:</h5>
+                {displayInvitees}
+            </div>
             </div>
         </div>
         </Fragment>

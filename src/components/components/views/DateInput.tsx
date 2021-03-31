@@ -35,7 +35,7 @@ const DateInput: React.FC<IDateInput> = ({date, setDate}) => {
     return (
         <div className="w-full"> 
         <h5>Date: (YYYY-MM-DD)</h5>
-        <div>
+        <div className="m-2">
             <label htmlFor="year">
                 <input name="year" className="w-16 " id="year" type="text"  maxLength={4} placeholder="YYYY" value={tempDate.year} onChange={onChangeInputs}/>- 
             </label>
