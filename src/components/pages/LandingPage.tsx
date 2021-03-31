@@ -7,12 +7,14 @@ const LandingPage: React.FC = () => {
         <Fragment>
         <section className="h-screen p-4 m-4 mb-6 text-gray-700 body-font">
         <div className="container flex-row">
-            <Link to="/signup"><button
-              className="flex flex-row float-right px-2 py-2 ml-4 text-xs bg-white border-2 border-black rounded text-md focus:outline-none hover:bg-gray-300"
-              type="button"
-            >
-              Sign Up
-            </button></Link>
+            <Link to="/signup">
+                <button
+                className="flex flex-row float-right px-2 py-2 ml-4 text-xs bg-white border-2 border-black rounded text-md focus:outline-none hover:bg-gray-300"
+                type="button"
+              >
+                Sign Up
+              </button>
+            </Link>
             <Link to="/signin">
             <button
               className="flex flex-row float-right px-2 py-2 ml-4 text-xs text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back"
