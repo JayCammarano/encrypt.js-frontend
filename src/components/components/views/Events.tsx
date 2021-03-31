@@ -1,8 +1,8 @@
 import React from 'react'
 import { EventInfo } from '../../../helpers/eventsInterface'
+import { UnpackedEventInfo, UnpackedInvitedEvent } from '../../pages/PagesInterface'
 interface IShowEvents {
-    allEvents: {myEvents: EventInfo[];
-        invitedEvents: EventInfo[];}
+    allEvents: UnpackedEventInfo
     setSelectedEvent: React.Dispatch<React.SetStateAction<[string, number]>>
 }
 
@@ -11,15 +11,24 @@ const Events: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
     const onClickSelector = (event: [any, string]) => {
         setSelectedEvent([event[1], event[0].index])
     }
+    let invitedEventCollection: EventInfo[]
 
     let allEventsCollection: (string | EventInfo)[][] = []
+    if(allEvents){
+        invitedEventCollection = allEvents.invitedEvents.map((event: UnpackedInvitedEvent) =>{ 
+            return event.decryptedEvent
+        })
+        invitedEventCollection.forEach((acceptedEvent: EventInfo) =>{
+            allEventsCollection.push([acceptedEvent, "invitedEvents"])
+        })
+    }
+    
+    if(allEvents.myEvents){
+        allEvents.myEvents.forEach((myEvent: EventInfo) =>{
+            allEventsCollection.push([myEvent, "myEvent"])
+        })
+    }
 
-    allEvents.invitedEvents.forEach((invitedEvent: EventInfo) =>{
-        allEventsCollection.push([invitedEvent, "invitedEvents"])
-    })
-    allEvents.myEvents.forEach((myEvent: EventInfo) =>{
-        allEventsCollection.push([myEvent, "myEvent"])
-    })
     const eventDisplay = allEventsCollection.map((event: any) => {
         i += 1
         let bg_color = "bg-gray-100";

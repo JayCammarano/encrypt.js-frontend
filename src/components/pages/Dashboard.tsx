@@ -4,7 +4,7 @@ import Events from "../../helpers/events";
 import { EventInfo } from '../../helpers/eventsInterface';
 import SideNav from "../components/SideNav";
 import ViewContainer from "../components/ViewContainer";
-import IPages, { RawUserInfo } from "./PagesInterface";
+import IPages, { RawEventInfo, RawUserInfo } from "./PagesInterface";
 
 
 const Dashboard: React.FC<IPages> = ({ setAuth }) => {
@@ -16,14 +16,14 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
                               },
                               events: {
                                   myEvents: [],
-                                  invitedEvents: []
+                                  invitedEvents: [{ encryptedEvent: "", accepted: false }]
                               }
                             }
   const [user, setUser] = useState(myEvent);
 
   const [unpackedEvents, setUnpackedEvents] = useState({
     myEvents: [eventDetail],
-    invitedEvents: [eventDetail]
+    invitedEvents: [{decryptedEvent: eventDetail, accepted: false}]
 });
 
 const initEvent: [string, number] = ["", 0]
@@ -45,7 +45,7 @@ const [selectedEvent, setSelectedEvent] = useState(initEvent)
       toast.error(err.message);
     }
   };
-  const eventsToPlainText = async (key: string | null, events: { myEvents: string[]; invitedEvents: string[]; }) => {
+  const eventsToPlainText = async (key: string | null, events: RawEventInfo) => {
     if(typeof key === 'string'){
       const eventHandler = new Events(key, events)
       const plainTextEvents = await eventHandler.unpackEvents()
@@ -70,7 +70,7 @@ const [selectedEvent, setSelectedEvent] = useState(initEvent)
   }, []);
   
   useEffect(() =>{
-    if(user.events !== { myEvents: [], invitedEvents:[] }){
+    if(user.events !== { myEvents: [], invitedEvents: [{encryptedEvent: "", accepted: false}]}){
       eventsToPlainText(localStorage.getItem("privateKey"), user.events)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,6 +1,7 @@
+import { RawEventInfo } from "../components/pages/PagesInterface"
+
 interface IAllEvents {
-    allEvents?: {myEvents: string[];
-            invitedEvents: string[];}
+    allEvents?: RawEventInfo
     privateKey: string
 }
 
