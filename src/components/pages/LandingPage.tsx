@@ -5,7 +5,7 @@ const LandingPage: React.FC = () => {
 
     return (
         <Fragment>
-        <section className="p-4 m-4 mb-6 text-gray-700 body-font">
+        <section className="h-screen p-4 m-4 mb-6 text-gray-700 body-font">
         <div className="container flex-row">
             <Link to="/signup"><button
               className="flex flex-row float-right px-2 py-2 ml-4 text-xs bg-white border-2 border-black rounded text-md focus:outline-none hover:bg-gray-300"
@@ -21,7 +21,7 @@ const LandingPage: React.FC = () => {
               Sign In
             </button></Link>
         </div>
-        <div className="container flex flex-col items-center px-4 py-6 mx-auto border-2 border-black rounded sm:py-12 md:py-24 md:flex-row">
+        <div className="container flex flex-col items-center px-4 py-6 m-4 mx-auto border-2 border-black rounded h-4/5 sm:py-12 md:py-24 md:flex-row">
           <div className="flex flex-col items-center mb-12 ml-4 text-center lg:pr-24 md:pr-16 md:items-start md:text-left md:mb-0">
             <h1 className="mb-4 text-3xl font-medium leading-tight text-gray-900 title-font sm:text-4xl">
               Secure Events Manager
@@ -36,12 +36,12 @@ const LandingPage: React.FC = () => {
                 >
                   Learn More
                 </button>
-                <button
+                <Link to="/signup"><button
                   className="inline-flex px-6 py-2 ml-4 text-lg text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back"
                   type="button"
                 >
                   Sign Up
-                </button>
+                </button></Link>
             </div>
           </div>
           <div className="w-5/6 lg:max-w-lg lg:w-full md:w-1/2"></div>
@@ -137,22 +137,6 @@ const LandingPage: React.FC = () => {
               On sign up the backend generates a private key for the user. This is encoded to a Base64 string to store in the database. This is done on the backend to prevent man in the middle attacks from accessing unencrypted keys.
               When the user creates an event the client encrypts the event using their private key and unique nonce. This is encoded to Base64 with the nonce.
               Slide: decryption and encryption. Then when an invite recipient logs in the backend decodes the event and reencodes it with the recipient’s private key and a newly generated nonce. 
-              </p>
-
-              <h5 className="mb-4 text-xl font-medium leading-tight text-gray-900 title-font sm:text-xl">
-              Points of Trust:</h5>
-              <p className="mb-8 leading-relaxed">
-
-              Using this method I have to trust that the following are uncompromised:
-              </p>
-              <ol>
-              <li>• The server</li>
-              <li>• The user and their login information</li> 
-              <li>• The username list</li>
-              </ol>
-              <br/>
-              <p className="mb-8 leading-relaxed">
-              If the user login is compromised the bad actor will be able to access events the user is invited to as well as create a bait event. The event would only be able to be shared with usernames known to the bad actor, which does limit its impact somewhat.
               </p>
           </div>
           <div className="object-cover object-center w-5/6 rounded shadow lg:max-w-lg lg:w-full md:w-1/2">
