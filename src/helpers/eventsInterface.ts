@@ -1,8 +1,13 @@
-import { RawEventInfo } from "../components/pages/PagesInterface"
+import { RawEventInfo, UnpackedEventInfo } from "../components/pages/PagesInterface"
 
 interface IAllEvents {
     allEvents?: RawEventInfo
     privateKey: string
+}
+
+export interface IShowEvents {
+    allEvents: UnpackedEventInfo
+    setSelectedEvent: React.Dispatch<React.SetStateAction<[string, number]>>
 }
 
 export interface IEvents {
@@ -12,6 +17,7 @@ export interface IEvents {
 
 export interface IEventDetails {
     event: EventInfo
+    invites?: boolean
 }
 
 export type EventInfo = {

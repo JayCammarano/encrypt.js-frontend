@@ -2,7 +2,7 @@ import React from 'react'
 import { EventInfo, IShowEvents } from '../../../helpers/eventsInterface'
 import { UnpackedInvitedEvent } from '../../pages/PagesInterface'
 
-const Events: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
+const Invites: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
     let i = 0
     const onClickSelector = (event: [any, string]) => {
         setSelectedEvent([event[1], event[0].index])
@@ -15,13 +15,7 @@ const Events: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
             return event.decryptedEvent
         })
         invitedEventCollection.forEach((acceptedEvent: EventInfo) =>{
-            allEventsCollection.push([acceptedEvent, "invitedEvents"])
-        })
-    }
-    
-    if(allEvents.myEvents){
-        allEvents.myEvents.forEach((myEvent: EventInfo) =>{
-            allEventsCollection.push([myEvent, "myEvent"])
+            allEventsCollection.push([acceptedEvent, "invites"])
         })
     }
 
@@ -45,9 +39,10 @@ const Events: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
     })
     return (
         <div className="h-screen overflow-scroll bg-gray-200 border-l-2 border-gray-300">
+            Invites
             {eventDisplay}
         </div>
     )
 }
 
-export default Events
+export default Invites
