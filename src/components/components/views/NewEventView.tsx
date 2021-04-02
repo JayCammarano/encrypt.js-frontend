@@ -30,8 +30,11 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
         inputs.invitees.push(invitee);
         setInvitee("")
     }
-    const removeInvitee = ( position: number ) => {
-        setInputs({...inputs, "invitees": inputs.invitees.slice(position, position)})
+    const removeInvitee = ( indexToRemove: number ) => {
+        // eslint-disable-next-line array-callback-return
+        let cleanedArray = inputs.invitees
+        cleanedArray.splice(indexToRemove-1, 1)
+        setInputs({...inputs, invitees: cleanedArray})
     }
     
     let position: number = -1
@@ -40,7 +43,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
         return(
         <div className="flex p-2">
             <p key={position}>{invitee}
-                <button className="pl-2 pr-2 ml-4 border-2 border-black rounded"  onClick={() => removeInvitee(position)}>
+                <button className="pl-2 pr-2 ml-4 border-2 border-black rounded" id={position.toString()}  onClick={() => removeInvitee(position)}>
                     Remove
                 </button>
             </p>
