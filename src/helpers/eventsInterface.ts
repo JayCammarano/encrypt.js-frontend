@@ -19,6 +19,7 @@ export interface IEventDetails {
     event?: EventInfo
     fullEvent?: UnpackedInvitedEvent
     invites?: boolean
+    setWhichTab?: React.Dispatch<React.SetStateAction<string>>
 }
 
 export type EventInfo = {
