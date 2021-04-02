@@ -1,5 +1,6 @@
 import React from 'react'
 import IEventViews from "./EventViewsInterface"
+import DeclineConfirm from './views/DeclineConfirm'
 import Events from "./views/Events"
 import Invites from "./views/Invites"
 import MyEventDetails from './views/MyEventDetails'
@@ -8,6 +9,7 @@ import NewEventView from "./views/NewEventView"
 
 const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events, selectedEvent=["", 0], setSelectedEvent}) => {
     let visibleView;
+    let eventDetails
     if(selectedTab === "newEvent"){
         visibleView = <NewEventView setSelectedEvent={setSelectedEvent} setWhichTab={setWhichTab}/>  
     }else if(selectedTab === "myEvents"){
@@ -27,13 +29,14 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events,
         }
     }
     
-    let eventDetails
     if(selectedEvent[0] === "myEvent" && events){
         eventDetails = <MyEventDetails event={events.myEvents[selectedEvent[1]]} />
     }else if (selectedEvent[0] === "invitedEvents" && events ){
         eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]].decryptedEvent} />
+    }else if(selectedTab === "decline" && events && selectedEvent[0] === "invites"){
+        eventDetails = <DeclineConfirm setWhichTab={setWhichTab} fullEvent={events.invitedEvents[selectedEvent[1]]} />
     }else if (selectedEvent[0] === "invites" && events ){
-        eventDetails = <MyEventDetails fullEvent={events.invitedEvents[selectedEvent[1]]} invites={true} />
+        eventDetails = <MyEventDetails setWhichTab={setWhichTab}  fullEvent={events.invitedEvents[selectedEvent[1]]} invites={true} />
     }
     return (
         <div className="flex border-black margin-0">

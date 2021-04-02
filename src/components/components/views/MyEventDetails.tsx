@@ -2,9 +2,8 @@ import React, { Fragment } from 'react';
 import { toast } from 'react-toastify';
 import { IEventDetails } from '../../../helpers/eventsInterface';
 
-const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites}) => {
+const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites, setWhichTab}) => {
     let buttons;
-
     const onAccept = async (eventID: string) => {
         const body ={
             "invitedEvent": eventID,
@@ -22,24 +21,6 @@ const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites}) =>
         }
     }
     
-    const onReject = async (eventID: string) => {
-        const body ={
-            "invitedEvent": eventID,
-            "accepted": false
-        }
-        const response = await fetch('http://localhost:1337/events/respond', {
-            method: 'DELETE',
-            headers: { token: localStorage.token,
-                    'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
-        });
-        const parseResponse = await response.json();
-        if(parseResponse === "Invite Deleted"){
-          toast.success("Invite Declined")
-        }
-    }
-
-    
     let eventDisplay;
     if(event){
         eventDisplay = (<Fragment>
@@ -49,7 +30,7 @@ const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites}) =>
             <p className="p-4 text-lg text-gray-600">{event.description}</p>
         </Fragment>)
     }else if(fullEvent){
-        if(invites){
+        if(invites && setWhichTab){
             buttons = (
                 <Fragment>
                     <button
@@ -60,14 +41,13 @@ const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites}) =>
                         Accept
                     </button>
                     <button
-                        onClick={() => onReject(fullEvent.eventID)}
+                        onClick={() => setWhichTab("decline")}
                         className="flex flex-row float-left px-2 py-2 ml-4 bg-white border-2 border-black rounded text-md focus:outline-none hover:bg-gray-300"
                         type="button"
                     >
                         Decline
                     </button>
-                </Fragment>
-            )
+                </Fragment>)
         }
         
         eventDisplay = (<Fragment>
@@ -76,6 +56,7 @@ const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites}) =>
             <p className="pl-4 text-gray-600 text-md">Location: {fullEvent.decryptedEvent.location}</p>
             <p className="p-4 text-lg text-gray-600">{fullEvent.decryptedEvent.description}</p>
             <p className="p-4 text-lg text-gray-600">{buttons}</p>
+
         </Fragment>)
     }
     return (
