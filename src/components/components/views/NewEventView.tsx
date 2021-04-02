@@ -32,7 +32,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
     }
     const removeInvitee = ( indexToRemove: number ) => {
         // eslint-disable-next-line array-callback-return
-        const cleanedArray = inputs.invitees
+        let cleanedArray = inputs.invitees
         cleanedArray.splice(indexToRemove-1, 1)
         setInputs({...inputs, invitees: cleanedArray})
     }
