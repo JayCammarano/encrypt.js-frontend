@@ -31,11 +31,12 @@ class Events implements IAllEvents{
 
         if(this.allEvents.invitedEvents){
             invitedEvents = await Promise.all(this.allEvents.invitedEvents.map(event => {
+             
                 if(event){
                     const dEvent = this.decryptEvent(event.encryptedEvent)
                     dEvent.index = invitedI
                     invitedI += 1
-                    return {decryptedEvent: dEvent, accepted: event.accepted}
+                    return {decryptedEvent: dEvent, accepted: event.accepted, eventID: event.eventId}
                 }
                 return undefined
             }));

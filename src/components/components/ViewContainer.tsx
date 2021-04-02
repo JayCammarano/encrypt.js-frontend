@@ -33,7 +33,7 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events,
     }else if (selectedEvent[0] === "invitedEvents" && events ){
         eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]].decryptedEvent} />
     }else if (selectedEvent[0] === "invites" && events ){
-        eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]].decryptedEvent} invites={true} />
+        eventDetails = <MyEventDetails fullEvent={events.invitedEvents[selectedEvent[1]]} invites={true} />
     }
     return (
         <div className="flex border-black margin-0">

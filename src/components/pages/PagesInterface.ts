@@ -19,6 +19,7 @@ export type RawEventInfo = {
 export type RawInvitedEvent = {
     encryptedEvent: string
     accepted: boolean
+    eventId: string
 }
 
 export type UnpackedEventInfo = {
@@ -28,8 +29,8 @@ export type UnpackedEventInfo = {
 }
 
 export type UnpackedInvitedEvent = {
-    decryptedEvent: EventInfo,
+    decryptedEvent: EventInfo
     accepted: boolean
-    
+    eventID: string
 }
 export default IPages

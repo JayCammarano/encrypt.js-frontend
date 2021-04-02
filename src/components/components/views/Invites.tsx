@@ -7,24 +7,35 @@ const Invites: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
     const onClickSelector = (event: [any, string]) => {
         setSelectedEvent([event[1], event[0].index])
     }
-    let invitedEventCollection: EventInfo[]
+    let invitedEventCollection: (EventInfo | undefined)[]
 
     let allEventsCollection: (string | EventInfo)[][] = []
     if(allEvents){
         invitedEventCollection = allEvents.invitedEvents.map((event: UnpackedInvitedEvent) =>{ 
-            return event.decryptedEvent
+            if(!event.accepted){
+                return event.decryptedEvent
+            }
+            return undefined
         })
-        invitedEventCollection.forEach((acceptedEvent: EventInfo) =>{
+
+        // eslint-disable-next-line array-callback-return
+        const filteredEvents = invitedEventCollection.filter(function(inEvent){
+            if(inEvent !== undefined){
+              return inEvent
+            }
+          })
+        filteredEvents.forEach((acceptedEvent: any) =>{
             allEventsCollection.push([acceptedEvent, "invites"])
         })
     }
 
-    const eventDisplay = allEventsCollection.map((event: any) => {
+    const eventsDisplay = allEventsCollection.map((event: any) => {
         i += 1
         let bg_color = "bg-gray-100";
         if(i % 2 === 0){
             bg_color = "bg-gray-200"
         }
+
         let truncEventTitle = event[0].title
 
         if(event[0].title.length >= 27){
@@ -37,10 +48,12 @@ const Invites: React.FC<IShowEvents>  = ({allEvents, setSelectedEvent}) => {
             </div>
         )
     })
+    
+    // eslint-disable-next-line array-callback-return
+
     return (
         <div className="h-screen overflow-scroll bg-gray-200 border-l-2 border-gray-300">
-            Invites
-            {eventDisplay}
+            {eventsDisplay}
         </div>
     )
 }

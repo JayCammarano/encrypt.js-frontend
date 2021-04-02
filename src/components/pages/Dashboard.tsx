@@ -16,14 +16,14 @@ const Dashboard: React.FC<IPages> = ({ setAuth }) => {
                               },
                               events: {
                                   myEvents: [],
-                                  invitedEvents: [{ encryptedEvent: "", accepted: false }]
+                                  invitedEvents: []
                               }
                             }
   const [user, setUser] = useState(myEvent);
 
   const [unpackedEvents, setUnpackedEvents] = useState({
     myEvents: [eventDetail],
-    invitedEvents: [{decryptedEvent: eventDetail, accepted: false}]
+    invitedEvents: [{decryptedEvent: eventDetail, accepted: false, eventID: ""}]
 });
 
 const initEvent: [string, number] = ["", 0]
@@ -70,7 +70,7 @@ const [selectedEvent, setSelectedEvent] = useState(initEvent)
   }, []);
   
   useEffect(() =>{
-    if(user.events !== { myEvents: [], invitedEvents: [{encryptedEvent: "", accepted: false}]}){
+    if(user.events !== { myEvents: [], invitedEvents: []}){
       eventsToPlainText(localStorage.getItem("privateKey"), user.events)
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,6 +80,7 @@ const [selectedEvent, setSelectedEvent] = useState(initEvent)
     setWhichTab("newEvent")
     setSelectedEvent(["", 0])
 }
+
   return (
     <Fragment>
       <div className="w-full h-2/5">

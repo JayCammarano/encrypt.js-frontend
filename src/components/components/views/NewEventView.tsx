@@ -38,11 +38,13 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
     const displayInvitees = inputs.invitees.map((invitee: string) => {
         position = position + 1
         return(
-        <p key={position}>{invitee}  
-            <button className="pl-2 pr-2 border-2 border-black rounded"  onClick={() => removeInvitee(position)}>
-                Remove
-            </button>
-        </p>)
+        <div className="flex p-2">
+            <p key={position}>{invitee}
+                <button className="pl-2 pr-2 ml-4 border-2 border-black rounded"  onClick={() => removeInvitee(position)}>
+                    Remove
+                </button>
+            </p>
+        </div>)
     })
 
     const onChangeInvitee = (e: ChangeEvent<HTMLInputElement>) => {
@@ -131,7 +133,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
             <div className="w-full p-4 text-center bg-gray-100 border-l-2 border-gray-300">
                 <h1 className="p-4 text-3xl font-medium leading-tight text-center text-gray-900 title-font sm:text-4xl">Create New Event</h1>            
                 <div className="flex w-full">
-                <form onSubmit={onSubmitHandler}>
+                <form className="p-4" onSubmit={onSubmitHandler}>
                     <div>
                         <label htmlFor="Title">
                             <input className="m-3 border-2 border-black rounded" name="title" id="title" required onChange={onChangeInputs} placeholder="Title" value={inputs.title} />
@@ -158,10 +160,10 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
                     Submit
                     </button>
                 </form>  
-                <div className="flex w-2/3 p-4 overflow-scroll text-center border-2 border-black rounded">
-                <h5>Invited Members:</h5>
-                {displayInvitees}
-            </div>
+                <div className="flex flex-col w-2/3 p-8 overflow-scroll text-center border-2 border-black rounded">
+                    <h5>Invited Members:</h5>
+                    {displayInvitees}
+                </div>
             </div>
         </div>
         </Fragment>

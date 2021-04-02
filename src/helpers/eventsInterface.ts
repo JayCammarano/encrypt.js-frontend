@@ -1,4 +1,4 @@
-import { RawEventInfo, UnpackedEventInfo } from "../components/pages/PagesInterface"
+import { RawEventInfo, UnpackedEventInfo, UnpackedInvitedEvent } from "../components/pages/PagesInterface"
 
 interface IAllEvents {
     allEvents?: RawEventInfo
@@ -16,7 +16,8 @@ export interface IEvents {
 }
 
 export interface IEventDetails {
-    event: EventInfo
+    event?: EventInfo
+    fullEvent?: UnpackedInvitedEvent
     invites?: boolean
 }
 
