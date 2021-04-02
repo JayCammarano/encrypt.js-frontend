@@ -1,7 +1,7 @@
 import React from 'react'
 import IEventViews from "./EventViewsInterface"
 import Events from "./views/Events"
-import Inbox from "./views/Inbox"
+import Invites from "./views/Invites"
 import MyEventDetails from './views/MyEventDetails'
 import MyEvents from "./views/MyEvents"
 import NewEventView from "./views/NewEventView"
@@ -20,15 +20,20 @@ const ViewContainer: React.FC<IEventViews> = ({setWhichTab, selectedTab, events,
             visibleView = <Events setSelectedEvent={setSelectedEvent} allEvents={events}/>  
         }else{
         }
-    }else if(selectedTab === "inbox"){
-        visibleView = <Inbox/>  
+    }else if(selectedTab === "invites"){
+        if(typeof events === 'object'){
+        visibleView = <Invites setSelectedEvent={setSelectedEvent} allEvents={events}/>  }
+        else {
+        }
     }
     
     let eventDetails
     if(selectedEvent[0] === "myEvent" && events){
         eventDetails = <MyEventDetails event={events.myEvents[selectedEvent[1]]} />
     }else if (selectedEvent[0] === "invitedEvents" && events ){
-        eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]]} />
+        eventDetails = <MyEventDetails event={events.invitedEvents[selectedEvent[1]].decryptedEvent} />
+    }else if (selectedEvent[0] === "invites" && events ){
+        eventDetails = <MyEventDetails fullEvent={events.invitedEvents[selectedEvent[1]]} invites={true} />
     }
     return (
         <div className="flex border-black margin-0">

@@ -1,7 +1,13 @@
+import { RawEventInfo, UnpackedEventInfo, UnpackedInvitedEvent } from "../components/pages/PagesInterface"
+
 interface IAllEvents {
-    allEvents?: {myEvents: string[];
-            invitedEvents: string[];}
+    allEvents?: RawEventInfo
     privateKey: string
+}
+
+export interface IShowEvents {
+    allEvents: UnpackedEventInfo
+    setSelectedEvent: React.Dispatch<React.SetStateAction<[string, number]>>
 }
 
 export interface IEvents {
@@ -10,7 +16,9 @@ export interface IEvents {
 }
 
 export interface IEventDetails {
-    event: EventInfo
+    event?: EventInfo
+    fullEvent?: UnpackedInvitedEvent
+    invites?: boolean
 }
 
 export type EventInfo = {
