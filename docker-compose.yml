@@ -1,0 +1,25 @@
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 3001:3000
+    command: yarn start
+    tty: true
+    env_file: .env
+
+
+  # API Prod
+  ## The example below is of a prod instance. Ideally prod shouldn't be `build`ing anything, it should be done via CI (like github actions!)
+  # app:
+  #   build:
+  #     context: .
+  ## OR
+  #   image: encryptionapp/api # or whatever your published docker image name/address is
+  #   ports:
+  #     - 1337:1337

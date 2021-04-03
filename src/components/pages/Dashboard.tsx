@@ -32,7 +32,7 @@ const [selectedEvent, setSelectedEvent] = useState(initEvent)
   const [whichTab, setWhichTab] = useState("myEvents")
   const getUser = async () => {
     try {
-      const response = await fetch('http://localhost:1337/dashboard', {
+      const response = await fetch(process.env.REACT_APP_API_URL + '/dashboard', {
         method: 'GET',
         headers: { token: localStorage.token }
       });
