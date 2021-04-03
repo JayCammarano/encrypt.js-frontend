@@ -11,7 +11,7 @@ services:
       - 3001:3000
     command: yarn start
     tty: true
-    env_file: .env
+    env_file: .env.development.local
 
 
   # API Prod
