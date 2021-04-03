@@ -30,20 +30,23 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
         inputs.invitees.push(invitee);
         setInvitee("")
     }
-    const removeInvitee = ( indexToRemove: number ) => {
+    const removeInvitee = (e: MouseEvent<HTMLButtonElement>) => {
+        const id = e.currentTarget.getAttribute("id")
         // eslint-disable-next-line array-callback-return
-        let cleanedArray = inputs.invitees
-        cleanedArray.splice(indexToRemove-1, 1)
-        setInputs({...inputs, invitees: cleanedArray})
+        if(id){
+            let cleanedArray = inputs.invitees
+            cleanedArray.splice(parseInt(id), 1)
+            setInputs({...inputs, invitees: cleanedArray})
+        }
     }
     
     let position: number = -1
     const displayInvitees = inputs.invitees.map((invitee: string) => {
         position = position + 1
         return(
-        <div className="flex p-2">
-            <p key={position}>{invitee}
-                <button className="pl-2 pr-2 ml-4 border-2 border-black rounded" onClick={() => removeInvitee(position)}>
+        <div key={position} id={position.toString()} className="flex p-2">
+            <p >{invitee}
+                <button  id={position.toString()} className="pl-2 pr-2 ml-4 border-2 border-black rounded" onClick={removeInvitee}>
                     Remove
                 </button>
             </p>
