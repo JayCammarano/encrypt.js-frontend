@@ -53,6 +53,7 @@
     "@types/react-router-dom": "^5.1.6",
     "@types/react-toastify": "^4.1.0",
     "autoprefixer": "^9",
+    "dotenv": "^8.2.0",
     "node-fetch": "^2.6.1",
     "postcss": "^7",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat"

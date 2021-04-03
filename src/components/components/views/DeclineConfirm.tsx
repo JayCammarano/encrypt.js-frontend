@@ -8,7 +8,7 @@ const DeclineConfirm: React.FC<IEventDetails> = ({fullEvent, setWhichTab}) => {
             "invitedEvent": eventID,
             "accepted": false
         }
-        const response = await fetch('http://localhost:1337/events/respond', {
+        const response = await fetch(process.env.APIURL + '/events/respond', {
             method: 'DELETE',
             headers: { token: localStorage.token,
                     'Content-Type': 'application/json'},
@@ -32,7 +32,7 @@ const DeclineConfirm: React.FC<IEventDetails> = ({fullEvent, setWhichTab}) => {
                 </button>
                     <button
                     onClick={() => setWhichTab("invites")}
-                    className="flex flex-row float-left px-2 py-2 mt-2 ml-4 bg-white border-2 border-black rounded  text-md focus:outline-none hover:bg-gray-300"
+                    className="flex flex-row float-left px-2 py-2 mt-2 ml-4 bg-white border-2 border-black rounded text-md focus:outline-none hover:bg-gray-300"
                     type="button"
                 >
                     Cancel

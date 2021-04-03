@@ -43,7 +43,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
         return(
         <div className="flex p-2">
             <p key={position}>{invitee}
-                <button className="pl-2 pr-2 ml-4 border-2 border-black rounded" id={position.toString()}  onClick={() => removeInvitee(position)}>
+                <button className="pl-2 pr-2 ml-4 border-2 border-black rounded" onClick={() => removeInvitee(position)}>
                     Remove
                 </button>
             </p>
@@ -118,7 +118,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
             if(validEvent.encryptedEvent){
                 const token = localStorage.getItem("token")
                 if(typeof token === 'string'){
-                    const submit = new onSubmit(validEvent, 'http://localhost:1337/events/new', token)
+                    const submit = new onSubmit(validEvent, process.env.APIURL + '/events/new', token)
                     const results = await submit.onSubmit()
                     if(results === true){
                         setWhichTab("myEvents")

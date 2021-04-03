@@ -1,3 +1,4 @@
+import { config as dotenv } from "dotenv";
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +8,7 @@ import LandingPage from './components/pages/LandingPage';
 import SignIn from "./components/pages/SignIn";
 import SignUp from './components/pages/SignUp';
 
+dotenv()
 toast.configure();
 
 const App: React.FC = () => {
@@ -21,7 +23,7 @@ const App: React.FC = () => {
       return false
     }
     try {
-      const response = await fetch("http://localhost:1337/auth/is_verify",{
+      const response = await fetch(process.env.APIURL + "/auth/is_verify",{
         method: "GET",
         headers: { token: token } 
       })

@@ -16,7 +16,7 @@ const SignIn: React.FC<IPages> = ({ setAuth }) => {
     event.preventDefault();
     const body = { username: inputs.username, password: inputs.password };
     try {
-      const response = await fetch('http://localhost:1337/auth/signin', {
+      const response = await fetch(process.env.APIURL + '/auth/signin', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)

@@ -6,7 +6,7 @@ it('submits the new user', async () => {
         username: "",
         password: ""
     }
-    const signInURL = 'http://localhost:1337/auth/signin'
+    const signInURL = process.env.APIURL + '/auth/signin'
     const submitter = new onSubmit(body, signInURL)
     expect(await submitter.onSubmit()).toBe(true)
 })
