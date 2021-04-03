@@ -1,5 +1,6 @@
 {
-  "name": "client",
+  "name": "@JayCammarano/encrypt.js-frontend",
+  "package-name": "JayCammarano/encrypt.js-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,7 +28,8 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
-    "test": "jest test --watch",
+    "test": "exit 0",
+    "jesttest": "jest test --watch",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
