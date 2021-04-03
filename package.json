@@ -1,6 +1,6 @@
 {
-  "name": "@JayCammarano/encrypt.js-frontend",
-  "package-name": "JayCammarano/encrypt.js-frontend",
+  "name": "@jaycammarano/encrypt.js-frontend",
+  "package-name": "@jaycammarano/encrypt.js-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
