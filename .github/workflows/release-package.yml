@@ -5,7 +5,7 @@ on:
     paths-ignore:
       - "**.md"
     branches: 
-      - main
+      - ghcr
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          password: ${{ secrets.DH_PW }}
       - name: Build and push
         id: docker_build
         uses: docker/build-push-action@v2
