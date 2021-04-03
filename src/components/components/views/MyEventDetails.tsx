@@ -9,7 +9,7 @@ const MyEventDetails: React.FC<IEventDetails> = ({fullEvent, event, invites, set
             "invitedEvent": eventID,
             "accepted": true
         }
-        const response = await fetch(process.env.APIURL + '/events/respond', {
+        const response = await fetch(process.env.REACT_APP_API_URL + '/events/respond', {
             method: 'PATCH',
             headers: { token: localStorage.token,
                     'Content-Type': 'application/json'},

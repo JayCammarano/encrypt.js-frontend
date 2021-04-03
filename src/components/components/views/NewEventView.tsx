@@ -118,7 +118,7 @@ const NewEventView: React.FC<IEventViews> = ({setWhichTab}) => {
             if(validEvent.encryptedEvent){
                 const token = localStorage.getItem("token")
                 if(typeof token === 'string'){
-                    const submit = new onSubmit(validEvent, process.env.APIURL + '/events/new', token)
+                    const submit = new onSubmit(validEvent, process.env.REACT_APP_API_URL + '/events/new', token)
                     const results = await submit.onSubmit()
                     if(results === true){
                         setWhichTab("myEvents")

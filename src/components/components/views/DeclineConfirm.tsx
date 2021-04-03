@@ -8,7 +8,7 @@ const DeclineConfirm: React.FC<IEventDetails> = ({fullEvent, setWhichTab}) => {
             "invitedEvent": eventID,
             "accepted": false
         }
-        const response = await fetch(process.env.APIURL + '/events/respond', {
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/events/respond`, {
             method: 'DELETE',
             headers: { token: localStorage.token,
                     'Content-Type': 'application/json'},

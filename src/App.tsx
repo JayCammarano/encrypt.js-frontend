@@ -23,7 +23,7 @@ const App: React.FC = () => {
       return false
     }
     try {
-      const response = await fetch(process.env.APIURL + "/auth/is_verify",{
+      const response = await fetch(process.env.REACT_APP_API_URL + "/auth/is_verify",{
         method: "GET",
         headers: { token: token } 
       })
