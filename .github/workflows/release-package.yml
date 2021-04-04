@@ -5,7 +5,7 @@ on:
     paths-ignore:
       - "**.md"
     branches: 
-      - dockerfile-update
+      - main
 
 jobs:
   build:
