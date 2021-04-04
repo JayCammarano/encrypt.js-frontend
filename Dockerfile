@@ -9,8 +9,11 @@ COPY tsconfig*.json ./
 
 RUN yarn install
 
+ENV NODE_ENV=production
 ADD ./src ./src
 ADD ./public ./public
+
+RUN yarn build
 
 
 
@@ -24,11 +27,12 @@ COPY yarn.lock ./
 COPY *.config.js ./
 COPY tsconfig*.json ./
 
-RUN yarn install
+RUN yarn install --production
 
 ## We just need the build to execute the command
-COPY --from=builder /usr/src/app/build ./build
-ADD ./public ./public
+COPY --from=builder /app/build ./build
+
+RUN npm install -g serve
 
 EXPOSE 3002
 CMD ["yarn", "run", "prod"]
