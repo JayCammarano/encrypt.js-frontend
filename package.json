@@ -28,6 +28,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "prod": "node ./build/App.js",
     "test": "exit 0",
     "jesttest": "jest test --watch",
     "eject": "react-scripts eject"
