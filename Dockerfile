@@ -10,11 +10,11 @@ COPY tsconfig*.json ./
 RUN yarn install
 
 ENV NODE_ENV=production
+ENV REACT_APP_API_URL=http://localhost:8000
 ADD ./src ./src
 ADD ./public ./public
 
 RUN yarn build
-
 
 
 FROM node:15.13.0-alpine3.13 AS production
