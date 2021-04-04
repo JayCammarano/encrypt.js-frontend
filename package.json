@@ -28,6 +28,7 @@
   "scripts": {
     "start": "craco start",
     "build": "craco build",
+    "prod": "serve -s build -l 3002",
     "test": "exit 0",
     "jesttest": "jest test --watch",
     "eject": "react-scripts eject"
