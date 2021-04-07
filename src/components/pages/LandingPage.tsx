@@ -32,12 +32,6 @@ const LandingPage: React.FC = () => {
             Since the origin of this country gatherings have been target by both law enforcement and opposing hate groups. Recently, the Black Lives Matter movement has been especially targeted by these groups. By creating a private, encrypted event manager users will be able to create events without the knowledge of these oppressive forces.
             </p>
             <div className="flex justify-center">
-               <button
-                  className="inline-flex px-6 py-2 ml-4 text-lg text-gray-700 bg-gray-500 border-0 rounded focus:outline-none hover:bg-gray-300"
-                  type="button"
-                >
-                  Learn More
-                </button>
                 <Link to="/signup"><button
                   className="inline-flex px-6 py-2 ml-4 text-lg text-white bg-black border-0 rounded focus:outline-black hover:bg-white hover:border-black hover:text-black hover:outline-back"
                   type="button"
